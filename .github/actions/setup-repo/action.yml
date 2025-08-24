@@ -1,0 +1,39 @@
+name: 'Setup repo for python'
+description: 'Setup Python and prepare the repository.'
+inputs:
+  working-directory:
+    description: 'The directory to run commands in.'
+    required: false
+    default: 'src'
+
+  python-version: 
+    required: false
+    default: '3.12'
+
+  resolution:
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+    
+    - name: Setup uv
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: make uv
+    
+    - name: Setup repo
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        if [ "${{ inputs.resolution }}" = "lowest" ]; then
+          make setup-lowest
+        else
+          make setup
+        fi
+      
