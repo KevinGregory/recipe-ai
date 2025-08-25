@@ -21,6 +21,11 @@ dependencies = [
     "orjson>=3.9.11, <4",
     "uvloop>=0.18, <1",
     "certifi>=2024.2.2,<2025",
+    "google-generativeai>=0.8.5",
+    "python-dotenv>=1.1.1",
+    "chromadb>=1.0.20",
+    "sentence-transformers>=5.1.0",
+    "baml-py>=0.205.0",
 ]
 [[project.authors]]
 name = "Ben Epstein"
@@ -70,4 +75,9 @@ parallel = true
 exclude_lines = [
     'pragma: no cover',
     'raise NotImplementedError'
+]
+
+[dependency-groups]
+dev = [
+    "jupyter>=1.1.1",
 ]
